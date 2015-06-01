@@ -38,9 +38,12 @@ public class GamePanel extends JPanel
          if(e.getKeyCode()==KeyEvent.VK_RIGHT)
          {
             rightPressed = true;
-            player.moveRight();
-            if(obstacle.inObstacle(player))
-               player.setX(player.getX()-10);
+            MoveThread moveThread = new MoveThread("right");
+            moveThread.start();
+            moveThread = null;
+            //player.moveRight();
+            //if(obstacle.inObstacle(player))
+               //player.setX(player.getX()-10);
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
@@ -90,6 +93,7 @@ public class GamePanel extends JPanel
          for(int x = 1; x <= 20; x++)
          {
             player.jump(direction);
+            //player.setX(player.getX() + 1);
             repaint();
             try
             {
@@ -114,6 +118,22 @@ public class GamePanel extends JPanel
             }
          }
          return;
+      }
+   }
+   private class MoveThread extends Thread
+   {
+      String direction;
+      public MoveThread(String dir)
+      {
+         super();
+         direction = dir;
+      }
+      public void run()
+      {
+         if(direction == "left")
+            player.moveLeft();
+         else if(direction == "right")
+            player.moveRight();
       }
    }
 }
