@@ -16,12 +16,12 @@ public class GamePanel extends JPanel
    public Player player;
    public Obstacle obstacle;
    public JumpThread jumpThread;
-   private final int playerStartingY = 650;  
+   private final int playerStartingY = 750;  
    private int playerTempX, playerTempY;
    public GamePanel()
    {   
       player = new Player(10, playerStartingY);  
-      obstacle = new Obstacle(500, 700);
+      obstacle = new Obstacle(500, 725);
       
       addKeyListener(new Key());
       setFocusable(true);
@@ -41,7 +41,7 @@ public class GamePanel extends JPanel
          {
             rightPressed = true;
             playerTempX = player.getX() + 10;
-            if(obstacle.inObstacle(player, playerTempX, player.getY()) == true)
+            if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
             //MoveThread moveThread = new MoveThread("right");
             //moveThread.start();
             //moveThread = null;
@@ -51,10 +51,9 @@ public class GamePanel extends JPanel
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
          {
             leftPressed = true;
-            playerTempY = player.getY() + 10;
-            player.moveLeft();
-            // if(obstacle.inObstacle(player))
-         //                player.setX(player.getX()+10);
+            playerTempX = player.getX() - 10;
+            if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
+               player.moveLeft();
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_UP)
