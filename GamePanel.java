@@ -18,32 +18,14 @@ public class GamePanel extends JPanel
    public JumpThread jumpThread;   
    public GamePanel()
    {   
-      //AudioClip aud = Sound.getClip("Insight.wav");
-   
-      //Sound.play(aud);
-   
-      //try
-      //{
-         //Thread.sleep(1000);
-      //}
-      //catch(Exception e)
-      //{
-         //e.printStackTrace();
-      //}
-      
-      //Sound.stop(aud);
-   
-   
-      player = new Player();  
+       player = new Player();  
       repaint();
       
-      obstacle = new Obstacle(0,0);
+      obstacle = new Obstacle(500,500);
       repaint();
       
       addKeyListener(new Key());
       setFocusable(true);
-      
-      
    }
    public void paintComponent(Graphics g)
    {
@@ -58,13 +40,11 @@ public class GamePanel extends JPanel
       {
          if(e.getKeyCode()==KeyEvent.VK_RIGHT)
          {
-            rightPressed = true;
             player.moveRight();
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
          {
-            leftPressed = true;
             player.moveLeft();
             repaint();
          }
