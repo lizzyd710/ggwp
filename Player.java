@@ -72,6 +72,14 @@ public class Player// extends JPanel
       return yPos;
    }
    /**
+    *Set's the players' x position to the integer passed.
+    *@param x The desired x position of the player.
+    */
+   public void setX(int x)
+   {
+      xPos = x;
+   }
+   /**
    *Moves the player ten pixels to the left.
    */
    public void moveLeft()

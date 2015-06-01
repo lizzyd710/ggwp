@@ -62,7 +62,7 @@ public class Obstacle extends Object
       {
          for(int x = getX(); x <= getX() + getWidth(); x++)   //starts at upper left corner(x,y)
             for(int y = getY(); y <= getY() + getWidth(); y++)
-               if(distance(x, y, player.getX(), player.getY()) <= player.getRadius() ) //checks every point on the bumper
+               if(distance(x, y, player.getX(), player.getY()) <= player.getWidth() ) //checks every point on the bumper
                   return true;            
          return false;
       }  

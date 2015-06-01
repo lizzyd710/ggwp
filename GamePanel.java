@@ -14,27 +14,12 @@ public class GamePanel extends JPanel
    private boolean rightPressed = false;
    private boolean upPressed = false;
    public Player player;
+   public Obstacle obstacle;
    public JumpThread jumpThread;   
    public GamePanel()
    {   
-      //AudioClip aud = Sound.getClip("Insight.wav");
-   
-      //Sound.play(aud);
-   
-      //try
-      //{
-         //Thread.sleep(1000);
-      //}
-      //catch(Exception e)
-      //{
-         //e.printStackTrace();
-      //}
-      
-      //Sound.stop(aud);
-   
-   
       player = new Player();  
-      repaint();
+      obstacle = new Obstacle(500, 700);
       
       addKeyListener(new Key());
       setFocusable(true);
@@ -44,6 +29,7 @@ public class GamePanel extends JPanel
       g.drawImage(BACKGROUND.getImage(), 0, 0, getWidth(), getHeight(), null); //IT WERKS AND IS SCALED AND STUFF
       //for the untitled png the green starts at (x, 520)
       player.draw(g);
+      obstacle.draw(g);
    }
    private class Key extends KeyAdapter
    {
@@ -53,12 +39,16 @@ public class GamePanel extends JPanel
          {
             rightPressed = true;
             player.moveRight();
+            if(obstacle.inObstacle(player))
+               player.setX(player.getX()-10);
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
          {
             leftPressed = true;
             player.moveLeft();
+            if(obstacle.inObstacle(player))
+               player.setX(player.getX()+10);
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_UP)
