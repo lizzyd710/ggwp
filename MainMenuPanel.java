@@ -16,19 +16,19 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
    public static Sound sound;
    public static AudioClip audioclip;
    private JDialog mydialog;
-   public InstructionsPanel instructionsPanel;
+   public static JFrame frame;
+   public AudioClip aud;
 
    public static void main(String[]args)
    {
-      JFrame frame = new JFrame("MainMenuPanel");
+      frame = new JFrame("MainMenuPanel");
       frame.setSize(768,614);
       frame.setLocation(0,0);
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       frame.setContentPane(new MainMenuPanel());
       frame.setVisible(true);
    }
-   
-  
+
    public void paintComponent(Graphics g)
    {
       g.drawImage(TEST.getImage(), 0, 0, getWidth(), getHeight(), null);//for the untitled png the green starts at x, 520
@@ -63,20 +63,8 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
       
       //Instructions Button & Panel
       JButton instructions = new JButton("Instructions");
-      instructions.addActionListener(
-            new InstructionsListener());
-           /* {
-               public void actionPerformed(ActionEvent e)
-               {
-                  mydialog = new JDialog();
-                  mydialog.setSize(new Dimension(300, 300));
-                  mydialog.setTitle("Instructions");
-                  mydialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-                  mydialog.setVisible(true);
-                  mydialog.setLayout(new FlowLayout());
-                  mydialog.add(new JLabel("DOUJKDSIJFKLDSJOIFLKSFHIOKDSF"));
-               }
-            });*/
+      instructions.addActionListener(new InstructionsListener());
+         
       subpanel.add(instructions);
       
       //Other Stuff
@@ -93,7 +81,7 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
       //Sound
       audioclip = sound.getClip("Insight.wav");
       sound.loop(audioclip);
-
+   
       
    }
    
@@ -105,17 +93,18 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
    {
       public void actionPerformed(ActionEvent e)
       {
-      JFrame game = new JFrame("GamePanel");
-      game.setSize(768,614);
-      game.setLocation(0,0);
-      game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      game.setContentPane(new GamePanel());
-      game.setVisible(true);
+         JFrame game = new JFrame("GamePanel");
+         game.setSize(768,614);
+         game.setLocation(0,0);
+         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         game.setContentPane(new GamePanel());
+         game.setVisible(true);
+         
+         
       
-      JFrame frame = new JFrame("MainMenuPanel");
-      frame.setContentPane(new MainMenuPanel());
-      frame.setVisible(true);
-      frame.dispose();
+         frame.dispose();
+         setVisible(false);
+      
       }
    }
    
