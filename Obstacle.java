@@ -13,12 +13,25 @@ public class Obstacle extends Object
    final private int width=40;
    private boolean isCollidable;
    private boolean isOnScreen;
+   private int[] xPosArray, yPosArray;
 
    public Obstacle(int x, int y)
    {
       xPos=x;
       yPos=y;
       obstacle = new ImageIcon("rsz_brick.png");
+      xPosArray = yPosArray = new int[getWidth()];
+      int count = 0; 
+      for(int ex = xPos; ex < xPosArray.length; ex++)
+      {
+         xPosArray[count] = ex;
+         count++;
+      }
+      for(int wy = yPos; wy < yPosArray.length; wy++)
+      {
+         yPosArray[count] = wy;
+         count++;
+      }
    }
       
    public int getX()
@@ -85,11 +98,8 @@ public class Obstacle extends Object
          for(int y = getY(); y <= getY() + getHeight(); y++)
             for(int px =tempX; px <= tempX + player.getWidth(); px++)
                for(int py = tempY; py <= tempY + player.getHeight(); py++)
-                  if(x == px || y == py)
-                  {
-                     return true; //checks every point on the bumper
-                     //break;
-                  }
+                  if(x == px && y == py)
+                     return true;
       //return true;            
       return false;
    }  
@@ -99,6 +109,13 @@ public class Obstacle extends Object
    {
       return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
    }	
-   
+   public int[] getXPosArray()
+   {
+      return xPosArray;
+   }
+   public int[] getYPosArray()
+   {
+      return yPosArray;
+   }
    
 }
