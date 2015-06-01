@@ -41,6 +41,8 @@ public class GamePanel extends JPanel
          if(e.getKeyCode()==KeyEvent.VK_RIGHT)
          {
             player.moveRight();
+            if(obstacle.inObstacle()==true)
+               player.setX(player.getX() - 10);
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
