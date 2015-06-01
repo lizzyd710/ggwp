@@ -58,15 +58,41 @@ public class Obstacle extends Object
 
 
    // returns true if any part of the polkadot is inside the bumper
+   // public boolean inObstacle(Player player)
+   // {
+      // for(int x = getX(); x <= getX() + getWidth(); x++)   //starts at upper left corner(x,y)
+         // for(int y = getY(); y <= getY() + getHeight(); y++)
+            // if(distance(x, y, player.getX()+player.getWidth(), player.getY()+player.getHeight()) <= 0 ) //checks every point on the bumper
+               // return true;            
+      // return false;
+   //}  
+   
+// returns true if any part of the polkadot is inside the bumper
    public boolean inObstacle(Player player)
    {
       for(int x = getX(); x <= getX() + getWidth(); x++)   //starts at upper left corner(x,y)
-         for(int y = getY(); y <= getY() + getWidth(); y++)
-            if(distance(x, y, player.getX()+player.getWidth(), player.getY()+player.getHeight()) <= 0 ) //checks every point on the bumper
-               return true;            
+         for(int y = getY(); y <= getY() + getHeight(); y++)
+            for(int px = player.getX(); px <= player.getX() + player.getWidth(); px++)
+               for(int py = player.getY(); py <= player.getY() + player.getHeight(); py++)
+                  if(x == px || y == py)
+                     return true; //checks every point on the bumper
+      //return true;            
       return false;
    }  
-  
+   public boolean inObstacle(Player player, int tempX, int tempY)
+   {
+      for(int x = getX(); x <= getX() + getWidth(); x++)   //starts at upper left corner(x,y)
+         for(int y = getY(); y <= getY() + getHeight(); y++)
+            for(int px =tempX; px <= tempX + player.getWidth(); px++)
+               for(int py = tempY; py <= tempY + player.getHeight(); py++)
+                  if(x == px || y == py)
+                  {
+                     return true; //checks every point on the bumper
+                     //break;
+                  }
+      //return true;            
+      return false;
+   }  
     
     // returns distance between (x1, y1) and (x2, y2)
    private double distance(double x1, double y1, double x2, double y2)
