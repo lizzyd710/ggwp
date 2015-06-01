@@ -14,6 +14,7 @@ public class GamePanel extends JPanel
    private boolean rightPressed = false;
    private boolean upPressed = false;
    public Player player;
+   public Obstacle obstacle;
    public JumpThread jumpThread;   
    public GamePanel()
    {   
@@ -36,14 +37,20 @@ public class GamePanel extends JPanel
       player = new Player();  
       repaint();
       
+      obstacle = new Obstacle(0,0);
+      repaint();
+      
       addKeyListener(new Key());
       setFocusable(true);
+      
+      
    }
    public void paintComponent(Graphics g)
    {
       g.drawImage(BACKGROUND.getImage(), 0, 0, getWidth(), getHeight(), null); //IT WERKS AND IS SCALED AND STUFF
       //for the untitled png the green starts at (x, 520)
       player.draw(g);
+      obstacle.draw(g);
    }
    private class Key extends KeyAdapter
    {
