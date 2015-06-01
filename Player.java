@@ -146,10 +146,10 @@ public class Player// extends JPanel
          setSprite(playerSpriteLeft);
       else if(facingRight() == true)
          setSprite(playerSpriteRight);
-      if(direction == "left")
-         xPos-= 10;
-      else if(direction == "right")
-         xPos+= 10;
+      // if(direction == "left")
+         // xPos-= 10;
+      // else if(direction == "right")
+         // xPos+= 10;
       yPos-= 10;
    }
    /**
@@ -162,10 +162,10 @@ public class Player// extends JPanel
          setSprite(playerSpriteLeft);
       else if(facingRight() == true)
          setSprite(playerSpriteRight);
-      if(direction == "left")
-         xPos-= 10;
-      else if(direction == "right")
-         xPos+= 10;
+      // if(direction == "left")
+         // xPos-= 10;
+      // else if(direction == "right")
+         // xPos+= 10;
       yPos+= 10;
    }
 }
