@@ -15,10 +15,12 @@ public class GamePanel extends JPanel
    private boolean upPressed = false;
    public Player player;
    public Obstacle obstacle;
-   public JumpThread jumpThread;   
+   public JumpThread jumpThread;
+   private final int playerStartingY = 650;  
+   private int playerTempX, playerTempY;
    public GamePanel()
    {   
-      player = new Player();  
+      player = new Player(10, playerStartingY);  
       obstacle = new Obstacle(500, 700);
       
       addKeyListener(new Key());
@@ -38,20 +40,21 @@ public class GamePanel extends JPanel
          if(e.getKeyCode()==KeyEvent.VK_RIGHT)
          {
             rightPressed = true;
-            MoveThread moveThread = new MoveThread("right");
-            moveThread.start();
-            moveThread = null;
-            //player.moveRight();
-            //if(obstacle.inObstacle(player))
-               //player.setX(player.getX()-10);
+            playerTempX = player.getX() + 10;
+            if(obstacle.inObstacle(player, playerTempX, player.getY()) == true)
+            //MoveThread moveThread = new MoveThread("right");
+            //moveThread.start();
+            //moveThread = null;
+               player.moveRight();
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
          {
             leftPressed = true;
+            playerTempY = player.getY() + 10;
             player.moveLeft();
-            if(obstacle.inObstacle(player))
-               player.setX(player.getX()+10);
+            // if(obstacle.inObstacle(player))
+         //                player.setX(player.getX()+10);
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_UP)
@@ -90,27 +93,27 @@ public class GamePanel extends JPanel
       }
       public void run()
       {
-         for(int x = 1; x <= 20; x++)
+         for(int x = 1; x <= 200; x++)
          {
             player.jump(direction);
             //player.setX(player.getX() + 1);
             repaint();
             try
             {
-               sleep(20);
+               sleep(2);
             }
             catch(Exception e)
             {
                System.out.println("E");
             }
          }
-         while(player.getY() < 700)
+         while(player.getY() < playerStartingY)
          {
             player.down(direction);
             repaint();
             try
             {
-               sleep(20);
+               sleep(2);
             }
             catch(Exception e)
             {
@@ -120,20 +123,27 @@ public class GamePanel extends JPanel
          return;
       }
    }
-   private class MoveThread extends Thread
-   {
-      String direction;
-      public MoveThread(String dir)
-      {
-         super();
-         direction = dir;
-      }
-      public void run()
-      {
-         if(direction == "left")
-            player.moveLeft();
-         else if(direction == "right")
-            player.moveRight();
-      }
-   }
+   // private class MoveThread extends Thread
+   // {
+      // String direction;
+      // public MoveThread(String dir)
+      // {
+         // super();
+         // direction = dir;
+      // }
+      // public void run()
+      // {
+         // if(direction == "left")
+         // {
+            // for(int x = player.getX() - 1; x > player.getX() - 10; x--)
+               // if(obstacle.inObstacle(player, x, player.getY()) == false)
+                  // player.moveLeft();
+         // }
+         // else if(direction == "right")
+            // for(int x = player.getX() + 1; x < player.getX() + 10; x++)
+               // if(obstacle.inObstacle(player, x, player.getY()) == false)
+                  // player.moveRight();
+         // return;
+      // }
+   // }
 }
