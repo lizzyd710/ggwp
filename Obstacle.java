@@ -59,13 +59,13 @@ public class Obstacle extends Object
 
    // returns true if any part of the polkadot is inside the bumper
    public boolean inObstacle(Player player)
-      {
-         for(int x = getX(); x <= getX() + getWidth(); x++)   //starts at upper left corner(x,y)
-            for(int y = getY(); y <= getY() + getWidth(); y++)
-               if(distance(x, y, player.getX(), player.getY()) <= player.getWidth() ) //checks every point on the bumper
-                  return true;            
-         return false;
-      }  
+   {
+      for(int x = getX(); x <= getX() + getWidth(); x++)   //starts at upper left corner(x,y)
+         for(int y = getY(); y <= getY() + getWidth(); y++)
+            if(distance(x, y, player.getX()+player.getWidth(), player.getY()+player.getHeight()) <= 0 ) //checks every point on the bumper
+               return true;            
+      return false;
+   }  
   
     
     // returns distance between (x1, y1) and (x2, y2)
