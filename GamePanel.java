@@ -18,11 +18,8 @@ public class GamePanel extends JPanel
    public JumpThread jumpThread;   
    public GamePanel()
    {   
-       player = new Player();  
-      repaint();
-      
-      obstacle = new Obstacle(500,500);
-      repaint();
+      player = new Player();  
+      obstacle = new Obstacle(500, 700);
       
       addKeyListener(new Key());
       setFocusable(true);
@@ -40,14 +37,18 @@ public class GamePanel extends JPanel
       {
          if(e.getKeyCode()==KeyEvent.VK_RIGHT)
          {
+            rightPressed = true;
             player.moveRight();
-            if(obstacle.inObstacle()==true)
-               player.setX(player.getX() - 10);
+            if(obstacle.inObstacle(player))
+               player.setX(player.getX()-10);
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
          {
+            leftPressed = true;
             player.moveLeft();
+            if(obstacle.inObstacle(player))
+               player.setX(player.getX()+10);
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_UP)
