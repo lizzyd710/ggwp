@@ -87,7 +87,7 @@ public class Player// extends JPanel
       facingLeft = true;
       facingRight = false;
       playerSprite = playerSpriteMovingLeft;
-      xPos -= 15;
+      xPos -= 10;
    }
    /**
    *Moves the player ten pixels to the right.
@@ -97,7 +97,7 @@ public class Player// extends JPanel
       facingLeft = false;
       facingRight = true;
       playerSprite = playerSpriteMovingRight;
-      xPos += 15;
+      xPos += 10;
    }
    
    public void draw(Graphics g)
@@ -146,11 +146,11 @@ public class Player// extends JPanel
          setSprite(playerSpriteLeft);
       else if(facingRight() == true)
          setSprite(playerSpriteRight);
-      // if(direction == "left")
-         // xPos-= 10;
-      // else if(direction == "right")
-         // xPos+= 10;
-      yPos-= 10;
+      if(direction == "left")
+         xPos-= 1;
+      else if(direction == "right")
+         xPos+= 1;
+      yPos-= 1;
    }
    /**
    *Brings the player back to the ground after a jump.
@@ -162,10 +162,10 @@ public class Player// extends JPanel
          setSprite(playerSpriteLeft);
       else if(facingRight() == true)
          setSprite(playerSpriteRight);
-      // if(direction == "left")
-         // xPos-= 10;
-      // else if(direction == "right")
-         // xPos+= 10;
-      yPos+= 10;
+      if(direction == "left")
+         xPos-= 1;
+      else if(direction == "right")
+         xPos+= 1;
+      yPos+= 1;
    }
 }
