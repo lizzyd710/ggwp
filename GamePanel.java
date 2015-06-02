@@ -40,34 +40,47 @@ public class GamePanel extends JPanel
          if(e.getKeyCode()==KeyEvent.VK_RIGHT)
          {
             rightPressed = true;
-            playerTempX = player.getX() + 10;
-            if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
-            //MoveThread moveThread = new MoveThread("right");
-            //moveThread.start();
-            //moveThread = null;
-               player.moveRight();
+            //playerTempX = player.getX() + 10;
+            //if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
+            MoveThread moveThread = new MoveThread("right");
+            moveThread.start();
+            moveThread = null;
+               //player.moveRight();
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_LEFT)
          {
             leftPressed = true;
-            playerTempX = player.getX() - 10;
-            if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
-               player.moveLeft();
+            //playerTempX = player.getX() - 10;
+            //if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
+               //player.moveLeft();
+            MoveThread moveThread = new MoveThread("left");
+            moveThread.start();
+            moveThread = null;
             repaint();
          }
          if(e.getKeyCode()==KeyEvent.VK_UP)
          {
+            MoveThread moveThread;
             if(upPressed == false)
             {
                upPressed = true;
                if(rightPressed == true)
+               {
+                  // moveThread = new MoveThread("right");
+                  // moveThread.start();
                   jumpThread = new JumpThread("right");
+               }
                else if(leftPressed == true)
+               {
+                  // moveThread = new MoveThread("left");
+                  // moveThread.start();
                   jumpThread = new JumpThread("left");
+               }
                else
                   jumpThread = new JumpThread("none");
                jumpThread.start();
+               moveThread = null;
                jumpThread = null;
             }
          }
@@ -85,17 +98,28 @@ public class GamePanel extends JPanel
    private class JumpThread extends Thread
    {
       private String direction;
+      private MoveThread moveThreadInJumpThread;
       public JumpThread(String d)
       {
          super();
          direction = d;
+         //moveThreadInJumpThread = new MoveThread(d);
       }
       public void run()
       {
          for(int x = 1; x <= 200; x++)
          {
             player.jump(direction);
-            //player.setX(player.getX() + 1);
+            if(direction == "right" && rightPressed == true)
+            {
+               moveThreadInJumpThread.start();
+               moveThreadInJumpThread = null;
+            }
+            else if(direction == "left" && leftPressed == true)
+            {
+               moveThreadInJumpThread.start();
+               moveThreadInJumpThread = null;
+            }
             repaint();
             try
             {
@@ -122,27 +146,29 @@ public class GamePanel extends JPanel
          return;
       }
    }
-   // private class MoveThread extends Thread
-   // {
-      // String direction;
-      // public MoveThread(String dir)
-      // {
-         // super();
-         // direction = dir;
-      // }
-      // public void run()
-      // {
-         // if(direction == "left")
-         // {
-            // for(int x = player.getX() - 1; x > player.getX() - 10; x--)
-               // if(obstacle.inObstacle(player, x, player.getY()) == false)
-                  // player.moveLeft();
-         // }
-         // else if(direction == "right")
-            // for(int x = player.getX() + 1; x < player.getX() + 10; x++)
-               // if(obstacle.inObstacle(player, x, player.getY()) == false)
-                  // player.moveRight();
-         // return;
-      // }
-   // }
+   private class MoveThread extends Thread
+   {
+      String direction;
+      public MoveThread(String dir)
+      {
+         super();
+         direction = dir;
+      }
+      public void run()
+      {
+         if(direction == "left")
+         {
+            playerTempX = player.getX() - 10;
+            if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
+               player.moveLeft();
+         }
+         else if(direction == "right")
+         {
+            playerTempX = player.getX() + 10;
+            if(obstacle.inObstacle(player, playerTempX, player.getY()) == false)
+               player.moveRight();
+         }
+         return;
+      }
+   }
 }
