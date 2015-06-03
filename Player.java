@@ -10,10 +10,10 @@ import java.lang.Thread;
 public class Player// extends JPanel
 {
    private ImageIcon playerSprite;
-   private final ImageIcon playerSpriteRight = new ImageIcon("test sprite.png");
-   private final ImageIcon playerSpriteLeft = new ImageIcon("test sprite left.png");
-   private final ImageIcon playerSpriteMovingRight = new ImageIcon("test sprite right moving.gif");
-   private final ImageIcon playerSpriteMovingLeft = new ImageIcon("test sprite moving left.gif");
+   public final ImageIcon playerSpriteRight = new ImageIcon("test sprite.png");
+   public final ImageIcon playerSpriteLeft = new ImageIcon("test sprite left.png");
+   public final ImageIcon playerSpriteMovingRight = new ImageIcon("test sprite right moving.gif");
+   public final ImageIcon playerSpriteMovingLeft = new ImageIcon("test sprite moving left.gif");
    private boolean facingLeft, facingRight;
    private int xPos, yPos;
    
@@ -87,7 +87,7 @@ public class Player// extends JPanel
       facingLeft = true;
       facingRight = false;
       playerSprite = playerSpriteMovingLeft;
-      xPos -= 10;
+      xPos -= 1;
    }
    /**
    *Moves the player ten pixels to the right.
@@ -97,7 +97,7 @@ public class Player// extends JPanel
       facingLeft = false;
       facingRight = true;
       playerSprite = playerSpriteMovingRight;
-      xPos += 10;
+      xPos += 1;
    }
    
    public void draw(Graphics g)
@@ -146,10 +146,10 @@ public class Player// extends JPanel
          setSprite(playerSpriteLeft);
       else if(facingRight() == true)
          setSprite(playerSpriteRight);
-      if(direction == "left")
-         xPos-= 1;
-      else if(direction == "right")
-         xPos+= 1;
+      // if(direction == "left")
+         // xPos-= 1;
+      // else if(direction == "right")
+         // xPos+= 1;
       yPos-= 1;
    }
    /**
@@ -162,10 +162,23 @@ public class Player// extends JPanel
          setSprite(playerSpriteLeft);
       else if(facingRight() == true)
          setSprite(playerSpriteRight);
-      if(direction == "left")
-         xPos-= 1;
-      else if(direction == "right")
-         xPos+= 1;
+      // if(direction == "left")
+         // xPos-= 1;
+      // else if(direction == "right")
+         // xPos+= 1;
       yPos+= 1;
+   }
+   
+   public boolean inObstacle(Obstacle[] obstacles, int tempX, int tempY)
+   {
+      for(int z = 0; z < obstacles.length; z++)
+         for(int x = obstacles[z].getX(); x <= obstacles[z].getX() + obstacles[z].getWidth(); x++)   //starts at upper left corner(x,y)
+            for(int y = obstacles[z].getY(); y <= obstacles[z].getY() + obstacles[z].getHeight(); y++)
+               for(int px =tempX; px <= tempX + getWidth(); px++)
+                  for(int py = tempY; py <= tempY + getHeight(); py++)
+                     if(x == px && y == py)
+                        return true;
+      //return true;            
+      return false;
    }
 }
