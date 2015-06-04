@@ -5,6 +5,7 @@ import java.awt.image.*;
 import javax.swing.ImageIcon;
 import java.applet.*;
 import java.util.*;
+import java.awt.Frame.*;
 
 public class MainMenuPanel extends JPanel //extend WindowListener & try the method windowOpened inside the Start Listener such as if(windowOpened == true), then blah blah blah or somethi
 {
@@ -27,6 +28,10 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       frame.setContentPane(new MainMenuPanel());
       frame.setVisible(true);
+      
+      int state = frame.getExtendedState();
+      state |= Frame.MAXIMIZED_BOTH;
+      frame.setExtendedState(state);
    }
 
    public void paintComponent(Graphics g)
@@ -45,17 +50,16 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
       
       JPanel subpanel = new JPanel();
       subpanel.setOpaque(false);
-      subpanel.setLayout(new GridLayout(1,3));
+      subpanel.setLayout(new GridLayout(1,4));
       
       //Buttons
-      JButton start = new JButton("Start");
-      start.addActionListener(new StartGameListener());
-      subpanel.add(start);
+      JButton kellystart = new JButton("Kelly Game");
+      kellystart.addActionListener(new KellyGameListener());
+      subpanel.add(kellystart);
       
-      JButton settings = new JButton("Settings");
-      settings.addActionListener(new SettingsListener());
-      settings.setEnabled(false);
-      subpanel.add(settings);
+      JButton elizabethstart = new JButton("Elizabeth Game");
+      elizabethstart.addActionListener(new ElizabethGameListener());
+      subpanel.add(elizabethstart);
    
       JButton exit = new JButton("Quit");
       exit.addActionListener(new QuitListener());
@@ -73,15 +77,12 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
       setOpaque(false);
       
       ImageIcon icon1 = new ImageIcon("MARIO.gif");
-      JLabel DERPMARIO = new JLabel("ayyyyy",icon1,JLabel.CENTER);
+      JLabel DERPMARIO = new JLabel("Objective of the game is to reach the end of the page.",icon1,JLabel.CENTER);
       DERPMARIO.setVerticalTextPosition(JLabel.BOTTOM);
       DERPMARIO.setHorizontalTextPosition(JLabel.CENTER);
       add(DERPMARIO);
       
-      //Sound
-      audioclip = sound.getClip("Insight.wav");
-      sound.loop(audioclip);
-   
+      
       
    }
    
@@ -89,7 +90,7 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
                                     
                                                           
 //StartButton   
-   private class StartGameListener implements ActionListener
+   private class KellyGameListener implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
@@ -99,23 +100,38 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
          game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          game.setContentPane(new GamePanel());
          game.setVisible(true);
-         
-         
       
          frame.dispose();
          setVisible(false);
-      
+         
+         int state = frame.getExtendedState();
+         state |= Frame.MAXIMIZED_BOTH;
+         game.setExtendedState(state);
       }
    }
    
-//SettingsButton   
-   private class SettingsListener implements ActionListener
+   private class ElizabethGameListener implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
       
+         JFrame game = new JFrame("GamePanel");
+         game.setSize(768,614);
+         game.setLocation(0,0);
+         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         game.setContentPane(new GamePanel());
+         game.setVisible(true);
+      
+         frame.dispose();
+         setVisible(false);
+         
+         int state = frame.getExtendedState();
+         state |= Frame.MAXIMIZED_BOTH;
+         game.setExtendedState(state);
+      
       }
    }
+
    
 //QuitButton 
    private class QuitListener implements ActionListener
@@ -137,6 +153,10 @@ public class MainMenuPanel extends JPanel //extend WindowListener & try the meth
          instruction.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          instruction.setContentPane(new InstructionsPanel());
          instruction.setVisible(true);
+         
+         int state = frame.getExtendedState();
+         state |= Frame.MAXIMIZED_BOTH;
+         instruction.setExtendedState(state);
       }
    }
 //Sound Stuff
