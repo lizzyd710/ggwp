@@ -14,6 +14,7 @@ public class GamePanel extends JPanel
    private boolean rightPressed = false;
    private boolean upPressed = false;
    private boolean inJump = false;
+   private boolean endOfPage = false;
    public Player player;
    public Obstacle obstacle;
    public Obstacle[] obstacles;
@@ -30,6 +31,13 @@ public class GamePanel extends JPanel
       MoveThread moveThread = new MoveThread();
       moveThread.start();
       GravityThread gThread = new GravityThread();
+      
+      EndThread endThread = new EndThread();
+      endThread.run();
+      if(endOfPage==true)
+      {
+      //do something
+            }
       //gThread.start();
       addKeyListener(new Key());
       setFocusable(true);
@@ -84,13 +92,8 @@ public class GamePanel extends JPanel
       
       obstacles[27] = new Obstacle("titandown.png", 970, 600);
       obstacles[28] = new Obstacle("titandown.png", 1001, 560);
-   
       
-      
-      
-      
-     
-   
+        
    }
    public void paintComponent(Graphics g)
    {
@@ -101,6 +104,8 @@ public class GamePanel extends JPanel
       for(int x = 0; x < obstacles.length; x++)
          obstacles[x].draw(g);
    }
+   
+
    private class Key extends KeyAdapter
    {
       public void keyPressed(KeyEvent e)
@@ -151,6 +156,31 @@ public class GamePanel extends JPanel
             leftPressed = false;
          if(e.getKeyCode()==KeyEvent.VK_UP)
             upPressed = false;
+      }
+   }
+   
+   private class EndThread extends Thread
+   {
+      private Dimension dimen;
+   
+      public EndThread()
+      
+      {
+         super();
+         dimen = new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
+      
+      }
+   
+      public void run()
+      {
+      
+         if(player.getX() == dimen.getWidth()-player.getWidth())
+         {
+            endOfPage=true;
+         }
+         else
+            endOfPage=false;
+      
       }
    }
    private class JumpThread extends Thread
