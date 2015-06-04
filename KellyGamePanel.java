@@ -36,20 +36,63 @@ public class GamePanel extends JPanel
       
       
       //Obstacles
-      obstacles = new Obstacle[11];
+      obstacles = new Obstacle[30];
       //first set of blocks
-      obstacles[0] = new Obstacle("kellybrick.png",200, 700);
-      obstacles[1] = new Obstacle("kellybrick.png",200, 740);
-      obstacles[2] = new Obstacle("kellybrick.png",200, 768);
+      obstacles[0] = new Obstacle("titanup.png",200, 700);
+      obstacles[1] = new Obstacle("titanold.png",200, 740);
+      obstacles[2] = new Obstacle("titanup.png",200, 768);
       
       //second set of blocks
-      obstacles[3] = new Obstacle("kellybrick.png", 240, 700);
-      obstacles[4] = new Obstacle("kellybrick.png", 280, 700);
+      obstacles[3] = new Obstacle("ladytitan.png", 240, 700);
+      obstacles[4] = new Obstacle("titanold.png", 280, 700);
+      
+      //step blocks
+      obstacles[5] = new Obstacle("titanold.png", 320, 670);
+      obstacles[6] = new Obstacle("ladytitan.png", 360, 630);
+      obstacles[7] = new Obstacle("ladytitan.png", 360, 590);
       
       //third set of blocks
-      obstacles[5] = new Obstacle("kellybrick.png", 320, 670);
+      obstacles[8] = new Obstacle("kawaieye.png", 400, 590);
+      obstacles[9] = new Obstacle("kawaieye.png", 440, 590);
+      obstacles[10] = new Obstacle("kawaieye.png", 480, 590);
+      
+      //bottom set of blocks
+      obstacles[11] = new Obstacle("kawaieye.png",520, 768);
+      obstacles[12] = new Obstacle("titanold.png",560, 768);
+      obstacles[13] = new Obstacle("kawaieye.png",400, 768);
+   
+      //after gap
+      obstacles[14] = new Obstacle("kawaieye.png", 430, 590);
+      obstacles[15] = new Obstacle("kawaieye.png", 470, 590);
+      
+      //more steps
+      obstacles[16] = new Obstacle("titanup.png", 510, 550);
+      obstacles[17] = new Obstacle("titanup.png", 550, 510);
+      obstacles[18] = new Obstacle("titanup.png", 590, 470);
+      
+      //fourth set of blocks
+      obstacles[19] = new Obstacle("ladytitan.png", 630, 470);
+      obstacles[20] = new Obstacle("kawaieye.png", 670, 470);
+      obstacles[21] = new Obstacle("ladytitan.png", 710, 470);
+      
+      //descend set of blocks
+      obstacles[22] = new Obstacle("titandown.png", 740, 600);
+      obstacles[23] = new Obstacle("titanold.png", 780, 600);
+      obstacles[24] = new Obstacle("titandown.png", 820, 600);
+      obstacles[25] = new Obstacle("titandown.png", 860, 600);
+      obstacles[26] = new Obstacle("ladytitan.png", 900, 600);
+      
+      obstacles[27] = new Obstacle("titandown.png", 970, 600);
+      obstacles[28] = new Obstacle("titandown.png", 1001, 560);
+   
+      
+      obstacles[29] = new Obstacle("levimiddle.png", 1100, 500);
+      
+      
+      
       
      
+   
    }
    public void paintComponent(Graphics g)
    {
