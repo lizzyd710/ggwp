@@ -21,8 +21,8 @@ public class GamePanel extends JPanel
    public JumpThread jumpThread;
    private final int playerStartingY = 750;  
    private int playerTempX, playerTempY, currentLevelY;
-   private Dimension dimen = new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
-   private double FRAME = dimen.getWidth();
+   /*private Dimension dimen = new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
+   private double FRAME = dimen.getWidth();*/
    public JFrame game;
    
    
@@ -100,10 +100,10 @@ public class GamePanel extends JPanel
       obstacles[28] = new Obstacle("titandown.png", 1001, 560);
       
       //Second Way?
-      if(FRAME-player.getX()<=player.getWidth())
+      /*if(FRAME-player.getX()<=player.getWidth())
       {
          BACKGROUND = new ImageIcon("win.jpg");
-      }
+      }*/
       
       JButton restart = new JButton("Restart");
       restart.addActionListener(new RestartListener());
@@ -212,7 +212,7 @@ private class RestartListener implements ActionListener
       public void run()
       {
       
-         if(player.getX() == dimen.getWidth()-player.getWidth())
+         if(player.getX() <= dimen.getWidth()-player.getWidth())
          {
             endOfPage=true;
          }
