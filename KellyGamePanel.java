@@ -6,7 +6,7 @@ import java.applet.*;
 
 public class GamePanel extends JPanel
 {
-   private static final ImageIcon BACKGROUND = new ImageIcon("rsz_aotbackground.jpg");
+   private static ImageIcon BACKGROUND = new ImageIcon("rsz_aotbackground.jpg");
    ImageIcon playerSprite = new ImageIcon("test sprite.png");
    private BufferedImage myImage;
    private Graphics g;
@@ -23,6 +23,7 @@ public class GamePanel extends JPanel
    private int playerTempX, playerTempY, currentLevelY;
    private Dimension dimen = new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
    private double FRAME = dimen.getWidth();
+   public JFrame game;
    
    
 
@@ -40,8 +41,9 @@ public class GamePanel extends JPanel
       endThread.run();
       if(endOfPage==true)
       {
-      //do something
+         BACKGROUND = new ImageIcon("win.jpg");
       }
+      
       //gThread.start();
       addKeyListener(new Key());
       setFocusable(true);
@@ -100,8 +102,14 @@ public class GamePanel extends JPanel
       //Second Way?
       if(FRAME-player.getX()<=player.getWidth())
       {
-       //do something
+         BACKGROUND = new ImageIcon("win.jpg");
       }
+      
+      JButton restart = new JButton("Restart");
+      restart.addActionListener(new RestartListener());
+      restart.setEnabled(true);
+      add(restart);
+
         
    }
    public void paintComponent(Graphics g)
@@ -114,6 +122,27 @@ public class GamePanel extends JPanel
          obstacles[x].draw(g);
    }
    
+private class RestartListener implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+
+         setVisible(false);
+         
+         JFrame reGame = new JFrame("GamePanel");
+         reGame.setSize(768,614);
+         reGame.setLocation(0,0);
+         reGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         reGame.setContentPane(new GamePanel());
+         reGame.setVisible(true);
+    
+         
+         int state = reGame.getExtendedState();
+         state |= Frame.MAXIMIZED_BOTH;
+         reGame.setExtendedState(state);
+
+      }
+   }
 
    private class Key extends KeyAdapter
    {
