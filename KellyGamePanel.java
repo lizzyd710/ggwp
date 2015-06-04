@@ -36,7 +36,7 @@ public class GamePanel extends JPanel
       
       
       //Obstacles
-      obstacles = new Obstacle[30];
+      obstacles = new Obstacle[29];
       //first set of blocks
       obstacles[0] = new Obstacle("titanup.png",200, 700);
       obstacles[1] = new Obstacle("titanold.png",200, 740);
