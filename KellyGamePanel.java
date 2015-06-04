@@ -21,6 +21,9 @@ public class GamePanel extends JPanel
    public JumpThread jumpThread;
    private final int playerStartingY = 750;  
    private int playerTempX, playerTempY, currentLevelY;
+   private Dimension dimen = new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
+   private double FRAME = dimen.getWidth();
+   
    
 
    public GamePanel()
@@ -32,12 +35,13 @@ public class GamePanel extends JPanel
       moveThread.start();
       GravityThread gThread = new GravityThread();
       
+      //First Way??
       EndThread endThread = new EndThread();
       endThread.run();
       if(endOfPage==true)
       {
       //do something
-            }
+      }
       //gThread.start();
       addKeyListener(new Key());
       setFocusable(true);
@@ -93,6 +97,11 @@ public class GamePanel extends JPanel
       obstacles[27] = new Obstacle("titandown.png", 970, 600);
       obstacles[28] = new Obstacle("titandown.png", 1001, 560);
       
+      //Second Way?
+      if(FRAME-player.getX()<=player.getWidth())
+      {
+       //do something
+      }
         
    }
    public void paintComponent(Graphics g)
