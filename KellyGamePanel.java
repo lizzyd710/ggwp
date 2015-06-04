@@ -86,8 +86,6 @@ public class GamePanel extends JPanel
       obstacles[28] = new Obstacle("titandown.png", 1001, 560);
    
       
-      obstacles[29] = new Obstacle("levimiddle.png", 1100, 500);
-      
       
       
       
