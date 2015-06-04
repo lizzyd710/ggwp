@@ -15,11 +15,11 @@ public class Obstacle extends Object
    private boolean isOnScreen;
    private int[] xPosArray, yPosArray;
 
-   public Obstacle(int x, int y)
+   public Obstacle(String filename, int x, int y)
    {
       xPos=x;
       yPos=y;
-      obstacle = new ImageIcon("rsz_brick.png");
+      obstacle = new ImageIcon(filename);
       xPosArray = yPosArray = new int[getWidth()];
       int count = 0; 
       for(int ex = xPos; ex < xPosArray.length; ex++)
